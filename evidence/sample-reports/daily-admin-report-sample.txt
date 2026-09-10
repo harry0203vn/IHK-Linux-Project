@@ -1,0 +1,55 @@
+Tagesbericht 2026-09-09T14:59:01+02:00 — server01
+
+=== check-disk ===
+
+[2026-09-09T14:59:01+02:00] START check-disk
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda2        25G   12G   12G  51% /
+OK disk=51% threshold=80%
+RESULT OK
+
+=== check-services ===
+
+[2026-09-09T14:59:01+02:00] START services
+ssh: active
+cron: active
+ufw: active
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere                   # IHK SSH
+22/tcp (v6)                ALLOW IN    Anywhere (v6)              # IHK SSH
+
+RESULT OK
+
+=== ssh-audit ===
+
+[2026-09-09T14:59:02+02:00] START ssh-audit
+EFFECTIVE CONFIG (global; Match contexts require separate review)
+port 22
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication yes
+authorizedkeysfile .ssh/authorized_keys .ssh/authorized_keys2
+
+SSH journal: last 24 hours
+Failed authentication events (not unique people): 0
+Active sessions:
+OK: root SSH login disabled. Zero events is not evidence of a tested login.
+RESULT OK
+
+=== log-report ===
+
+Bewertung: Wiederholte Loginfehler auf Herkunft und Zeitraum pruefen; Warnungen sind Hinweise, kein automatischer Angriffsnachweis.
+REPORT /var/log/company-admin/reports/log-report-20260909T145902-8RwnH4.txt
+RESULT OK
+
+=== Letztes Backup ===
+/backup/company/company-20260909T145901-23927.tar.gz; age=1 seconds
+
+Teamleitung: RESULT ATTENTION und WARN pruefen. Bericht 16:30, Backup 17:00: letzter verfuegbarer Stand wird bewertet.
+Overall exit status: 0

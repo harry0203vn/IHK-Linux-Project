@@ -1,0 +1,66 @@
+SSH-Konfigurationsnotizen (server01) — Stand 09.09.2026, real auf der VM geprüft
+====================================================================
+
+Konfigurationsort
+------------------
+Kein direktes Editieren der Haupt-sshd_config. Änderungen erfolgen ueber eine
+separate Drop-in-Datei:
+  /etc/ssh/sshd_config.d/00-company-admin.conf
+gesetzt und verwaltet durch skripte/configure-security.sh. Vor jeder Aenderung
+wird /etc/ssh real nach $STATE/rollback gesichert (Rollback-Moeglichkeit).
+
+Effektive Werte (real geprueft mit: sshd -T | grep -E '^(port|permitrootlogin|passwordauthentication|pubkeyauthentication) ')
+------------------------------------------------------------------
+  port                      22
+  permitrootlogin           no
+  pubkeyauthentication      yes
+  passwordauthentication    yes   (serverseitig bewusst nicht deaktiviert,
+                                   siehe Begruendung unten)
+  authorizedkeysfile        .ssh/authorized_keys .ssh/authorized_keys2
+
+Root-Login-Bewertung
+---------------------
+PermitRootLogin no ist gesetzt und real verifiziert. Root-Zugang per SSH ist
+nicht erforderlich, da der Benutzer admin gezielt sudo verwenden kann. Damit
+ist ein kompromittierter SSH-Zugang nicht automatisch ein Root-Zugang.
+
+Passwortlogin und Key-Login im Vergleich
+------------------------------------------
+Passwort-Authentifizierung bleibt serverseitig aktiv, um bestehende
+Lernzugaenge (frueherer Kursbenutzer) nicht zu verlieren. Der reale
+administrative Zugriff auf server01 wurde jedoch ausschliesslich mit
+Public-Key-Authentifizierung durchgefuehrt und getestet: der Windows-Client
+erzwingt dabei clientseitig PasswordAuthentication=no fuer die admin-Session,
+sodass bei jedem realen Login kein Passwort abgefragt wird.
+
+  Passwortlogin                          Key-Login (ED25519, real genutzt)
+  --------------------------------------  --------------------------------------
+  Geheimnis ist ein Passwort, das         Geheimnis ist ein privater Schluessel,
+  erraten, abgephisht oder per            der den Windows-Client nie verlaesst;
+  Brute-Force angegriffen werden kann.    Brute-Force gegen den Schluessel selbst
+                                          ist praktisch aussichtslos (ED25519).
+  Gleiche Staerke bei jedem Login         Fingerprint wird einmalig gegen die
+  erforderlich; keine Bindung an ein      Konsole verifiziert; danach ist der
+  bestimmtes Geraet.                      Zugang an den Besitz des privaten
+                                          Schluessels auf dem Windows-Client
+                                          gebunden.
+  Fehlgeschlagene Versuche sind in        Fehlgeschlagene Versuche sind ebenfalls
+  ssh-audit.sh sichtbar, aber ein         sichtbar; ein einzelner falscher
+  gueltiges Passwort genuegt fuer         Schluessel fuehrt nie zu einem
+  Zugriff.                                erfolgreichen Login.
+
+Fazit: Fuer den administrativen Zugriff auf server01 ist der Key-Login die
+staerkere und tatsaechlich verwendete Methode. Passwortlogin bleibt aus
+Kompatibilitaetsgruenden fuer andere, nicht-administrative Kurszugaenge
+verfuegbar, wird fuer die Administration aber nicht genutzt.
+
+UFW und SSH
+------------
+configure-security.sh ermittelt den effektiven SSH-Port real aus
+"sshd -T" (keine hartcodierte Portnummer) und gibt ihn gezielt in UFW frei,
+bevor UFW aktiviert wird. Bestehende, nicht projektbezogene UFW-Regeln bleiben
+unveraendert. Nachweis: sudo ufw status verbose (siehe Screenshot
+AP09_02_ssh_retest_ufw_active.png, dokumentation/10_fehlerprotokoll.md).
+
+Quelle: skripte/configure-security.sh, dokumentation/03_ssh_zugriff.md,
+Originalaufgabe §§3, 14.

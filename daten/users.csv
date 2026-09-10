@@ -1,0 +1,9 @@
+username,primary_group,additional_group,fullname
+it.admin,it,employees,IT Administrator
+support01,it,employees,Support Mitarbeiter 01
+sales01,sales,employees,Vertrieb Mitarbeiter 01
+sales02,sales,employees,Vertrieb Mitarbeiter 02
+accounting01,accounting,employees,Buchhaltung Mitarbeiter 01
+management01,management,employees,Geschaeftsfuehrung 01
+intern01,employees,,Praktikant 01
+sales03,sales,employees,Vertrieb Mitarbeiter 03
