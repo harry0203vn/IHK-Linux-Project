@@ -332,11 +332,7 @@ bash skripte/vm-run.sh preflight
 
 ### 5. Komplette Deployment-Sequenz (mit VM-Snapshot!)
 
-Siehe [dokumentation/DEPLOYMENT.md](dokumentation/DEPLOYMENT.md) für das **Batch-System** (Batches 0–7):
-
-```bash
-bash dokumentation/DEPLOYMENT.md
-```
+Siehe [dokumentation/DEPLOYMENT.md](dokumentation/DEPLOYMENT.md) und führe die dort beschriebenen Batches 0–7 in der angegebenen Reihenfolge durch.
 
 ---
 
@@ -451,7 +447,7 @@ python3 skripte/verify-package.py
 
 ### Komplette Deployment-Sequenz
 
-Für produktiven Einsatz:
+Für eine vollständige Lab-Bereitstellung:
 
 1. **Batch 0–2:** Systemeigenschaften prüfen, SSH vorbereiten
 2. **Batch 3:** SSH-Sicherheit aktivieren
