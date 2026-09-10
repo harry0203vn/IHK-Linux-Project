@@ -4,10 +4,10 @@
 [![Linux](https://img.shields.io/badge/Linux-Ubuntu-orange.svg)](https://ubuntu.com/)
 [![Bash](https://img.shields.io/badge/Bash-Automatisierung-brightgreen.svg)](https://www.gnu.org/software/bash/)
 [![Python](https://img.shields.io/badge/Python-Testing-blue.svg)](https://www.python.org/)
-[![Certification](https://img.shields.io/badge/Zertifizierung-IHK-gold.svg)]()
+[![Certification](https://img.shields.io/badge/Kontext-IHK--Weiterbildung-gold.svg)]()
 [![Version](https://img.shields.io/badge/Version-v1.0-blue.svg)]()
 
-> 🚀 Ein **umfassendes Linux-Systemadministrations-Projekt** zur praktischen Umsetzung realistischer Serveraufgaben: CSV-gesteuerte Benutzerverwaltung, POSIX-ACL-Rechtekonzepte, SSH-Härtung, automatisierte Backups, Cron-Jobs, strukturiertes Logging und Fehlerdiagnose. Entwickelt und zertifiziert im Rahmen einer **IHK-Weiterbildung (Fachinformatik)**.
+> 🚀 Ein **umfassendes Linux-Systemadministrations-Projekt** zur praktischen Umsetzung realistischer Serveraufgaben: CSV-gesteuerte Benutzerverwaltung, POSIX-ACL-Rechtekonzepte, SSH-Härtung, automatisierte Backups, Cron-Jobs, strukturiertes Logging und Fehlerdiagnose. Entwickelt im Rahmen einer **IHK-Weiterbildung (Fachinformatik)**.
 
 ---
 
@@ -59,7 +59,7 @@ Das Projekt wurde **eigenständig im Rahmen einer IHK-Weiterbildung umgesetzt** 
 | 📊 **Monitoring** | Disk-Status, Service-Health-Checks, SSH-Audit, Tagesbericht für nicht-technische Leser |
 | 🧪 **Testing** | 24 automatisierte Tests + 10 Praxis-Admin-Szenarien + 8 kontrollierte Fehlerszenarien |
 | 📦 **Deployment** | Reproduzierbares ZIP-Paket mit `MANIFEST.json`-Checksummen-Verifikation (Python) |
-| 📸 **Evidence** | 12+ reale Terminal-Screenshots + Sample-Reports zur Nachvollziehbarkeit |
+| 📸 **Evidence** | 13 reale Terminal-Screenshots + Sample-Reports zur Nachvollziehbarkeit |
 
 ---
 
@@ -84,17 +84,18 @@ IHK-Linux-Project/
 ├── 📄 README.md                           # Diese Datei
 ├── 📄 .gitignore
 │
-├── 📂 skripte/                            # Bash- & Python-Administrationsskripte
-│   ├── 00-init-system.sh                 # Systemvorbereitung
-│   ├── 01-users-groups-setup.sh          # CSV-gesteuerte Benutzer/Gruppen
-│   ├── 02-filesystem-permissions.sh      # Unix-Rechte & POSIX-ACLs
-│   ├── 03-ssh-security.sh                # SSH-Härtung & Key-Management
-│   ├── 04-backup-management.sh           # Backup/Restore mit Retention
-│   ├── 05-cron-automation.sh             # Cronjob-Installation & Monitoring
-│   ├── 06-logging-setup.sh               # Strukturiertes Logging
-│   ├── 07-testing-framework.sh           # Test-Automatisierung
-│   ├── verify_deployment.py              # ZIP-Paket-Verifikation
-│   └── [weitere Hilfsskripte]
+├── 📂 skripte/                            # Bash- & Python-Administrationsskripte (29 Skripte)
+│   ├── setup-users.sh                    # CSV-gesteuerte Benutzer/Gruppen
+│   ├── setup-folders.sh                  # Verzeichnisse, Unix-Rechte & POSIX-ACLs
+│   ├── configure-security.sh             # SSH-Härtung & UFW-Firewall
+│   ├── backup-company.sh                 # Backup mit SHA-256-Checksumme
+│   ├── restore-company.sh                # Restore mit Integritätsprüfung
+│   ├── configure-cron.sh                 # Cronjob-Installation & Probe-Modus
+│   ├── daily-admin-report.sh             # Tagesbericht für nicht-technische Leser
+│   ├── run-tests.sh                      # Automatisierte Test-Suite (T01–T24)
+│   ├── run-fault-tests.sh                # Kontrollierte Fehlerszenarien (F01–F08)
+│   ├── validate-csv.py                   # CSV-Validierung
+│   └── [weitere Skripte — siehe skripte/]
 │
 ├── 📂 daten/                              # CSV-Testdaten & Konfiguration
 │   ├── users.csv                         # Fiktive Benutzerdaten
@@ -103,33 +104,32 @@ IHK-Linux-Project/
 │
 ├── 📂 konfiguration/                      # Konfigurationsreferenz
 │   ├── sshd_config_notizen.txt           # SSH-Härtungs-Notizen
-│   ├── crontab_referenz.txt              # Cron-Job-Definition
-│   └── [weitere Konfigurationen]
+│   └── company-crontab.conf              # Reale Cron-Job-Definition (5 Jobs)
 │
 ├── 📂 tests/                              # Python unittest & Test-Suites
-│   ├── test_csv_validation.py            # CSV-Format-Validierung
+│   ├── test_csv.py                       # CSV-Format-Validierung
 │   ├── test_console_guard.py             # Konsolen-Ausgabe-Validierung
 │   └── [weitere Tests]
 │
 ├── 📂 tools/                              # Deployment-Paketierung & Verifikation
-│   └── create_deployment_package.py      # ZIP + MANIFEST.json-Generator
+│   ├── build-package.py                  # ZIP + MANIFEST.json-Generator
+│   └── check-package.py                  # Checksummen-Verifikation
 │
 ├── 📂 dokumentation/                      # Ausführliche Dokumentation
 │   ├── architecture.md                   # Systementwurf & Netzwerkmodell
 │   ├── users-and-permissions.md          # Benutzerverwaltung & ACL-Konzepte
-│   ├── ssh-and-security.md               # SSH-Härtung & Sicherheitsdetails
 │   ├── backup-and-restore.md             # Backup-Strategie & Wiederherstellung
 │   ├── monitoring-and-cron.md            # Cron & Automatisierung
 │   ├── testing.md                        # 24 dokumentierte Tests
 │   ├── ADMIN_CASES.md                    # 10 praxisnahe Admin-Szenarien
 │   ├── troubleshooting.md                # 3 reale Fehlerfälle mit Root-Cause
-│   └── DEPLOYMENT.md                     # Firstrun-Runbook (Batches 0–7)
+│   └── DEPLOYMENT.md                     # Inbetriebnahme-Runbook (Batches 0–7)
 │
 └── 📂 evidence/                           # Nachweise & Screenshots
     ├── README.md                         # Evidence-Übersicht
     ├── AP03_03_ssh_login_success.png    # SSH-Login-Beweis
     ├── AP04_01_deploy_users_folders.png # Benutzer/Gruppen-Verwaltung
-    ├── [weitere Screenshots]
+    ├── [weitere Screenshots — 13 insgesamt]
     └── sample-reports/
         └── daily-admin-report-sample.txt # Beispiel-Tagesbericht
 ```
@@ -146,13 +146,13 @@ IHK-Linux-Project/
 - ✅ **Backup-Strategien** — `tar.gz`-Komprimierung, SHA-256-Checksummen, Retention-Policy
 
 ### Automatisierung & Scripting
-- ✅ **Bash-Scripting** — Modulare, produktionsreife Skripte mit Error-Handling
+- ✅ **Bash-Scripting** — Modulare Skripte mit Error-Handling, Root-Guard und Reversibilität
 - ✅ **Python-Integration** — Deployment-Verifikation, Unit-Tests, CSV-Validierung
 - ✅ **Cron-Automatisierung** — 5 Jobs mit strukturiertem Logging und Verifikation
 - ✅ **Konfigurationsmanagement** — Zentrale Konfigurationsdatei, Drop-in-Verzeichnisse
 
 ### Testing & Qualitätssicherung
-- ✅ **Automatisierte Tests** — 24 Testfälle, Fehlerinjection, Nachverfizierung
+- ✅ **Automatisierte Tests** — 24 Testfälle, Fehlerinjection, Nachverifizierung
 - ✅ **Fehlerszenarien** — 8 kontrollierte Fehlerfälle mit Diagnose & Behebung
 - ✅ **Root-Cause-Analyse** — 3 dokumentierte reale Fehlerfälle mit Lernprozess
 - ✅ **Verifikations-Prozesse** — Probe-Modus, Live-Logs, Artefakt-Prüfung
@@ -168,7 +168,7 @@ IHK-Linux-Project/
 
 ## 📋 Hauptfunktionen & Module
 
-### 1️⃣ Benutzer- & Gruppenverwaltung (`01-users-groups-setup.sh`)
+### 1️⃣ Benutzer- & Gruppenverwaltung (`setup-users.sh`)
 
 **Ziel:** CSV-gesteuerte, idempotente Verwaltung von Benutzern und Gruppen
 
@@ -183,7 +183,7 @@ IHK-Linux-Project/
 
 ---
 
-### 2️⃣ Dateisystemrechte & ACLs (`02-filesystem-permissions.sh`)
+### 2️⃣ Dateisystemrechte & ACLs (`setup-folders.sh`)
 
 **Ziel:** Abteilungsbasierte Isolation mit POSIX-ACLs
 
@@ -198,7 +198,7 @@ IHK-Linux-Project/
 
 ---
 
-### 3️⃣ SSH-Sicherheit & Firewall (`03-ssh-security.sh`)
+### 3️⃣ SSH-Sicherheit & Firewall (`configure-security.sh`)
 
 **Ziel:** Härtung des SSH-Zugangs für sichere Administration
 
@@ -213,7 +213,7 @@ IHK-Linux-Project/
 
 ---
 
-### 4️⃣ Backup & Restore (`04-backup-management.sh`)
+### 4️⃣ Backup & Restore (`backup-company.sh`, `restore-company.sh`)
 
 **Ziel:** Zuverlässige, verifizierbare Backup-Strategie
 
@@ -228,16 +228,18 @@ IHK-Linux-Project/
 
 ---
 
-### 5️⃣ Cron-Automatisierung & Monitoring (`05-cron-automation.sh`, `daily-admin-report.sh`)
+### 5️⃣ Cron-Automatisierung & Monitoring (`configure-cron.sh`, `daily-admin-report.sh`)
 
 **Ziel:** Automatisierung von Routine-Aufgaben mit strukturiertem Reporting
 
-**5 Cronjobs:**
-1. **Stündliches Backup** — regelmäßige Datensicherung
-2. **Tägliche Retention-Bereinigung** — alte Backups entfernen
-3. **Täglicher Sicherheitsbericht** — SSH-Audit, Disk-Status, Service-Health
-4. **Stündliche Systemüberwachung** — Resource-Check, Log-Rotation
-5. **Probe-Modus** (optional) — minütliche Verifikation aller Skripte
+**5 Cronjobs** (siehe [konfiguration/company-crontab.conf](konfiguration/company-crontab.conf)):
+1. **Backup, täglich 17:00 Uhr** — `backup-company.sh`
+2. **Tagesbericht, täglich 16:30 Uhr** — `daily-admin-report.sh`
+3. **Disk-Check, stündlich** — `check-disk.sh`
+4. **Log-Report, wöchentlich (Fr. 18:00 Uhr)** — `log-report.sh`, SSH-/Cron-/UFW-Status
+5. **Cleanup alter Dateien, wöchentlich (Fr. 19:00 Uhr)** — `cleanup-old-files.sh`, Retention-Bereinigung
+
+Alle Jobs laufen über den zentralen Wrapper `cron-runner.sh`. Zur Verifikation existiert ein reversibler **Probe-Modus** (`configure-cron.sh probe` / `remove-probe`), der alle 5 Jobs vorübergehend auf minütliche Ausführung umstellt und real per `journalctl` abgleicht.
 
 **Features:**
 - 📝 Strukturiertes Logging unter `/var/log/company-admin/`
@@ -249,7 +251,7 @@ IHK-Linux-Project/
 
 ---
 
-### 6️⃣ Testing & Fehlerszenarien (`07-testing-framework.sh`)
+### 6️⃣ Testing & Fehlerszenarien (`run-tests.sh`, `run-fault-tests.sh`)
 
 **Ziel:** Umfassende Qualitätssicherung mit echten Fehlerfällen
 
@@ -284,7 +286,7 @@ IHK-Linux-Project/
 ⚠️ **Keine Enterprise-Security-Baseline** — Zeigt Konzepte und Techniken, nicht vollständig gehärtet  
 ⚠️ **Passwort-Login aktiv** — Für Kompatibilität, wird aber für Admin nicht genutzt  
 
-**Sicherheits-Details:** [dokumentation/ssh-and-security.md](dokumentation/ssh-and-security.md)
+**Sicherheits-Details:** [dokumentation/users-and-permissions.md](dokumentation/users-and-permissions.md), [konfiguration/sshd_config_notizen.txt](konfiguration/sshd_config_notizen.txt)
 
 ---
 
@@ -318,14 +320,14 @@ cat daten/users.csv
 cat daten/groups.csv
 ```
 
-### 4. Einzelne Skripte testen
+### 4. Einzelne Skripte prüfen
 
 ```bash
-# Nur "dry-run" prüfen, keine Änderungen
-bash skripte/01-users-groups-setup.sh --check
+# Syntax-Check ohne Ausführung
+bash -n skripte/setup-users.sh
 
-# Oder auf Syntax prüfen
-bash -n skripte/01-users-groups-setup.sh
+# Read-only Preflight (keine Systemänderung)
+bash skripte/vm-run.sh preflight
 ```
 
 ### 5. Komplette Deployment-Sequenz (mit VM-Snapshot!)
@@ -343,40 +345,37 @@ bash dokumentation/DEPLOYMENT.md
 ### Automatisierte Test-Suite
 
 ```bash
-# Alle Tests ausführen (21 Tests)
-bash skripte/07-testing-framework.sh --run-all
-
-# Nur spezifische Test-Kategorie
-bash skripte/07-testing-framework.sh --tests users
-bash skripte/07-testing-framework.sh --tests permissions
-bash skripte/07-testing-framework.sh --tests backup
+# Funktionale Tests (T02–T09a, T11–T23), real auf der VM — Kernlauf von 24 Tests gesamt
+bash skripte/run-tests.sh --apply
 ```
+
+T01, T10 und T24 werden gesondert real durchgeführt (externer SSH-Login, Cron-Probe, Retention-Lauf) — siehe [dokumentation/testing.md](dokumentation/testing.md).
 
 ### Fehlerszenarien & Fehlerinjection
 
 ```bash
-# Kontrollierte Fehlerfälle (F01–F08) mit Nachtest
-bash skripte/07-testing-framework.sh --faults
-
-# Spezifischen Fehlerfall testen
-bash skripte/07-testing-framework.sh --fault F01
+# Kontrollierte Fehlerfälle (F01–F08), nur an der VM-Konsole
+bash skripte/run-fault-tests.sh --apply --snapshot-confirmed
 ```
 
 ### Admin-Szenarien
 
 ```bash
-# 10 praxisnahe Admin-Fälle (z.B. Benutzer hinzufügen, Backup restoren)
-bash skripte/07-testing-framework.sh --admin-cases
+# Praxisnahe Admin-Fälle (AF01–AF10), z.B. neuer Mitarbeiter, Restore-Test
+bash skripte/run-business-cases.sh --apply --snapshot-confirmed
 ```
 
 ### Cron-Verifikation (Probe-Modus)
 
 ```bash
-# Minütliche Verifikation aller 5 Jobs installieren
-bash skripte/05-cron-automation.sh --install-probe
+# Alle 5 Jobs vorübergehend auf minütliche Ausführung umstellen
+sudo bash skripte/configure-cron.sh probe
 
-# Live-Logs prüfen
-journalctl -u company-admin-probe.service -f
+# Nach 2–3 Minuten realer Wartezeit: Journal prüfen
+sudo journalctl | grep company-admin
+
+# Probe wieder entfernen
+sudo bash skripte/configure-cron.sh remove-probe
 ```
 
 ---
@@ -387,13 +386,13 @@ journalctl -u company-admin-probe.service -f
 |----------|--------|
 | [architecture.md](dokumentation/architecture.md) | Systementwurf, Verzeichnisstruktur, Netzwerkmodell |
 | [users-and-permissions.md](dokumentation/users-and-permissions.md) | Benutzerverwaltung, ACL-Konzepte, real aufgetretener Fehler & Root-Cause |
-| [ssh-and-security.md](dokumentation/ssh-and-security.md) | SSH-Härtung, Public-Key-Auth, Firewall |
+| [users-and-permissions.md](dokumentation/users-and-permissions.md) | Benutzerverwaltung, ACL-Konzepte, SSH-Härtung, Public-Key-Auth |
 | [backup-and-restore.md](dokumentation/backup-and-restore.md) | Backup-Strategie, Restore-Prozess, Retention-Policy |
 | [monitoring-and-cron.md](dokumentation/monitoring-and-cron.md) | 5 Cronjobs, Logging, Tagesbericht |
 | [testing.md](dokumentation/testing.md) | 24 automatisierte Tests mit Ergebnissen |
 | [ADMIN_CASES.md](dokumentation/ADMIN_CASES.md) | 10 praxisnahe Admin-Szenarien |
 | [troubleshooting.md](dokumentation/troubleshooting.md) | 3 reale Fehlerfälle mit Diagnose & Behebung |
-| [DEPLOYMENT.md](dokumentation/DEPLOYMENT.md) | Firstrun-Runbook (Batches 0–7) mit Snapshot-Absicherung |
+| [DEPLOYMENT.md](dokumentation/DEPLOYMENT.md) | Inbetriebnahme-Runbook (Batches 0–7) mit Snapshot-Absicherung |
 
 ---
 
@@ -403,13 +402,13 @@ Dieses Projekt dokumentiert **real aufgetretene Fehler** — nicht nur Idealfäl
 
 ### Beispiel: ACL-Testfehler (T18)
 
-**Problem:** `test -w /path` meldete "schreibbar", aber `touch` schlug fehl (echte Schreibberechtigung fehlte).
+**Problem:** `test -w /company/accounting` meldete für den Benutzer `it.admin` **FAIL** ("nicht schreibbar"), obwohl ein echter Schreibvorgang (`touch`) klaglos gelang — ein False-Negative.
 
-**Root-Cause:** `test -w` prüft nur Linux-Sicherheitsmodell, nicht POSIX-ACLs.
+**Root-Cause:** `it.admin` erhält sein Schreibrecht ausschließlich über eine POSIX-ACL (nicht über die traditionelle Gruppenzugehörigkeit). Das Kommando `test -w` wertet aber nur die klassischen Unix-Rechtebits aus, nicht die ACL — der Fehler lag im Testwerkzeug, nicht in der ACL-Konfiguration.
 
-**Lösung:** Auf echter Schreibversuch umstellen (`touch` → Rückgabewert prüfen).
+**Lösung:** Die Testzeile wurde auf einen echten, ACL-bewussten Schreibversuch umgestellt (`mktemp` im Zielverzeichnis statt `test -w`).
 
-**Screenshot:** [evidence/AP11_03_t18_diagnostic_acl_root_cause.png](evidence/AP11_03_t18_diagnostic_acl_root_cause.png)
+**Screenshot:** [evidence/screenshots/AP11_03_t18_diagnostic_acl_root_cause.png](evidence/screenshots/AP11_03_t18_diagnostic_acl_root_cause.png)
 
 ---
 
@@ -422,9 +421,9 @@ Dieses Projekt dokumentiert **real aufgetretene Fehler** — nicht nur Idealfäl
 | **F03** | Cronjob-Fehler | Falscher Skriptpfad in crontab |
 | **F04** | Backup-Zielordner fehlt | Backup-Skript stoppt ohne Zielordner |
 | **F05** | Fehlende Gruppe | Benutzer kann nicht zu Gruppe hinzugefügt werden |
-| **F06** | ACL-Fehler | ACL-Regeln nicht anwendbar |
-| **F07** | SSH-Key-Fehler | Public-Key nicht installiert |
-| **F08** | Log-Rotation-Fehler | Logs werden nicht rotiert |
+| **F06** | Skript ohne `sudo` ausgeführt | Root-Guard verhindert Ausführung |
+| **F07** | Fehlerhafte CSV-Zeile | Validierung (`validate-csv.py`) schlägt kontrolliert fehl |
+| **F08** | Backup-Verzeichnis zu offen (`755`) | Fault-Test, Rechte auf `700` zurückgesetzt |
 
 Alle Fehler werden nach dem Test automatisch zurückgesetzt (`trap ... EXIT`).
 
@@ -438,17 +437,16 @@ Alle Fehler werden nach dem Test automatisch zurückgesetzt (`trap ... EXIT`).
 
 ```bash
 # ZIP-Paket mit MANIFEST.json-Checksummen erstellen
-python3 tools/create_deployment_package.py
-
-# ZIP wird unter `deployment/` erstellt
-ls -lh deployment/*.zip
+python3 tools/build-package.py
 ```
 
 ### Verifikation
 
 ```bash
 # Checksummen-Verifikation vor Einsatz
-python3 skripte/verify_deployment.py deployment/ihk-linux-project-*.zip
+python3 tools/check-package.py
+# oder auf der Ziel-VM:
+python3 skripte/verify-package.py
 ```
 
 ### Komplette Deployment-Sequenz
@@ -470,17 +468,17 @@ Siehe: [dokumentation/DEPLOYMENT.md](dokumentation/DEPLOYMENT.md)
 
 | Element | Status | Beweis |
 |---------|--------|--------|
-| 🎯 Benutzer-/Gruppenverwaltung | ✅ | `01-users-groups-setup.sh` |
-| 🔐 Dateisystemrechte & ACLs | ✅ | `02-filesystem-permissions.sh` |
-| 🔑 SSH-Sicherheit | ✅ | `03-ssh-security.sh` + Konfiguration |
-| 💾 Backup/Restore | ✅ | `04-backup-management.sh` |
-| ⏰ Cron-Automatisierung | ✅ | `05-cron-automation.sh` + 5 Jobs |
+| 🎯 Benutzer-/Gruppenverwaltung | ✅ | `setup-users.sh` |
+| 🔐 Dateisystemrechte & ACLs | ✅ | `setup-folders.sh` |
+| 🔑 SSH-Sicherheit | ✅ | `configure-security.sh` + Konfiguration |
+| 💾 Backup/Restore | ✅ | `backup-company.sh` + `restore-company.sh` |
+| ⏰ Cron-Automatisierung | ✅ | `configure-cron.sh` + 5 Jobs |
 | 📝 Strukturiertes Logging | ✅ | `/var/log/company-admin/` |
-| 🧪 24 automatisierte Tests | ✅ | `07-testing-framework.sh` |
+| 🧪 24 automatisierte Tests | ✅ | `run-tests.sh` |
 | 🐛 8 Fehlerszenarien | ✅ | F01–F08 mit Diagnosetests |
 | 📋 10 Admin-Szenarien | ✅ | [ADMIN_CASES.md](dokumentation/ADMIN_CASES.md) |
-| 📸 12+ Evidence-Screenshots | ✅ | [evidence/](evidence/) |
-| 📦 Reproduzierbares ZIP-Paket | ✅ | `tools/create_deployment_package.py` |
+| 📸 13 Evidence-Screenshots | ✅ | [evidence/](evidence/) |
+| 📦 Reproduzierbares ZIP-Paket | ✅ | `tools/build-package.py` + `tools/check-package.py` |
 | ✅ Umfassende Dokumentation | ✅ | 8 Markdown-Dateien in `dokumentation/` |
 
 ---
@@ -497,7 +495,7 @@ Mit diesem Projekt wurden praktisch folgende Kompetenzen demonstriert:
 ✅ Backup-, Restore- und Retention-Strategien  
 
 ### Automatisierung & Scripting
-✅ Bash-Skripting (modulare, produktionsreife Skripte)  
+✅ Bash-Skripting (modulare, robuste Skripte mit Error-Handling)  
 ✅ Python-Integration (Unit-Tests, Verifikation)  
 ✅ CSV-Datenverarbeitung & Validierung  
 ✅ Cron-basierte Automation mit Logging  
@@ -524,12 +522,12 @@ Mit diesem Projekt wurden praktisch folgende Kompetenzen demonstriert:
 ### ⭐ IHK Linux Sysadmin Lab
 
 **📅 Entwickelt:** 2025–2026 (IHK-Weiterbildung)  
-**✅ Status:** Abgeschlossen & Zertifiziert  
+**✅ Status:** Abgeschlossen (im Rahmen der IHK-Weiterbildung)  
 **🏷️ Version:** v1.0  
-**🎓 Projekt-Typ:** Eigenständige IHK-Systemadministrations-Abschlussprüfung  
-**📚 Dokumentation:** Umfassend (8 Markdown-Dateien + 12+ Screenshots)  
+**🎓 Projekt-Typ:** Eigenständiges Abschlussprojekt im Rahmen einer IHK-Weiterbildung (Fachinformatik)  
+**📚 Dokumentation:** Umfassend (8 Markdown-Dateien + 13 Screenshots)  
 
-**Entwickler:** Huy Ha Hoang ([@harry0203vn](https://github.com/harry0203vn))
+**Entwickler:** [@harry0203vn](https://github.com/harry0203vn)
 
 ---
 
@@ -545,6 +543,6 @@ Mit diesem Projekt wurden praktisch folgende Kompetenzen demonstriert:
 
 > **Hinweis:** Dieses Projekt ist ein **Lab & Portfolio-Demonstrator**, nicht für Produktiveinsatz gedacht. Alle Benutzer- und Firmendaten sind fiktiv. Keine privaten Schlüssel, Passwörter oder produktiven Zugangsdaten sind enthalten.
 
-**[⬆ Nach oben](#-ikh-linux-sysadmin-lab--unternehmensserver-verwaltung)**
+**[⬆ Nach oben](#-ihk-linux-sysadmin-lab--unternehmensserver-verwaltung)**
 
 </div>
